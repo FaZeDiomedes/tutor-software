@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}Agregar Usuario{% endblock %}
+
+{% block content %}
+<h2 style="text-align:center; margin-bottom: 30px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #222;">
+  Agregar Nuevo Usuario
+</h2>
+
+<div style="max-width: 450px; margin: 0 auto; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-message {{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" style="
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      background-color: #f9f9f9;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgb(0 0 0 / 0.1);
+    ">
+        <label for="email" style="font-weight: 600; color: #333;">Correo Electrónico (ITC):</label>
+        <input type="email" name="email" id="email" required placeholder="ejemplo@itc.edu.co" style="
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          font-size: 1rem;
+          outline-color: #0077cc;
+        ">
+
+        <label for="password" style="font-weight: 600; color: #333;">Contraseña:</label>
+        <input type="password" name="password" id="password" required placeholder="******" style="
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          font-size: 1rem;
+          outline-color: #0077cc;
+        ">
+
+        <label for="rol" style="font-weight: 600; color: #333;">Rol:</label>
+        <select name="rol" id="rol" required style="
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          font-size: 1rem;
+          outline-color: #0077cc;
+          cursor: pointer;
+        ">
+          <option value="estudiante">Estudiante</option>
+          <option value="admin">Administrador</option>
+        </select>
+
+        <button type="submit" style="
+          background-color: #0077cc;
+          color: white;
+          border: none;
+          padding: 12px;
+          border-radius: 10px;
+          font-weight: 700;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        " onmouseover="this.style.backgroundColor='#005ea6';" onmouseout="this.style.backgroundColor='#0077cc';">
+          Agregar Usuario
+        </button>
+    </form>
+
+    <div style="margin-top: 20px; text-align: center;">
+        <a href="{{ url_for('admin_listar_usuarios') }}" style="color: #555; font-weight: 600; text-decoration: underline;">
+          Volver a la Lista de Usuarios
+        </a>
+    </div>
+</div>
+{% endblock %}

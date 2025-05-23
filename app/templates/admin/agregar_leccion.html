@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Agregar Lección{% endblock %}
+
+{% block content %}
+<h2>Agregar Nueva Lección</h2>
+
+<form method="POST" style="max-width: 600px;">
+    <label for="titulo" style="font-weight: 600;">Título:</label><br>
+    <input type="text" id="titulo" name="titulo" required style="width: 100%; padding: 8px; margin-bottom: 12px; border-radius: 4px; border: 1px solid #ccc;"><br>
+
+    <label for="contenido" style="font-weight: 600;">Contenido:</label><br>
+    <textarea id="contenido" name="contenido" rows="8" required
+              style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;"></textarea><br>
+
+    <button type="submit" style="background-color: #00509e; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer;">
+        Agregar Lección
+    </button>
+</form>
+
+<br>
+<a href="{{ url_for('admin_dashboard') }}" style="color: #003366; font-weight: 600; text-decoration: none;">&larr; Volver al Panel de Administración</a>
+
+{% endblock %}

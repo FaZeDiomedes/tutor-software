@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+{% block title %}Panel de Administración - Tutor Software{% endblock %}
+
+{% block content %}
+<h2 style="text-align:center; margin-bottom: 30px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #222;">
+  Panel de Administración
+</h2>
+
+<p style="text-align:center; font-size: 1.1rem; color: #555; margin-bottom: 40px;">
+  Bienvenido, administrador <strong style="color:#0077cc;">{{ session.get('user') }}</strong>.
+</p>
+
+<div style="
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+">
+
+  <div style="
+    background: #e8f0fe;
+    padding: 25px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  " onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 10px 20px rgba(0, 112, 204, 0.3)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 12px rgb(0 0 0 / 0.1)';">
+    <h3 style="color: #00509e; margin-bottom: 10px;">Editar Contenido</h3>
+    <p style="color: #444; font-size: 0.95rem; margin-bottom: 20px;">
+      Gestiona las lecciones y recursos educativos disponibles.
+    </p>
+    <a href="{{ url_for('admin_agregar_leccion') }}">
+      <button style="
+        background-color: #00509e;
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        margin-bottom: 10px;
+        width: 100%;
+        transition: background-color 0.3s ease;
+      " onmouseover="this.style.backgroundColor='#003d73';" onmouseout="this.style.backgroundColor='#00509e';">
+        Agregar Lección
+      </button>
+    </a>
+    <a href="{{ url_for('admin_listar_lecciones') }}">
+      <button style="
+        background-color: #0077cc;
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        width: 100%;
+        transition: background-color 0.3s ease;
+      " onmouseover="this.style.backgroundColor='#005ea6';" onmouseout="this.style.backgroundColor='#0077cc';">
+        Ver/Listar Lecciones
+      </button>
+    </a>
+  </div>
+
+  <div style="
+    background: #fff7e6;
+    padding: 25px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  " onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 10px 20px rgba(244, 162, 97, 0.3)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 12px rgb(0 0 0 / 0.1)';">
+    <h3 style="color: #d9822b; margin-bottom: 10px;">Gestionar Usuarios</h3>
+    <p style="color: #444; font-size: 0.95rem; margin-bottom: 20px;">
+      Visualiza y administra cuentas de usuarios registrados.
+    </p>
+    <a href="{{ url_for('admin_listar_usuarios') }}">
+      <button style="
+        background-color: #f4a261;
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        width: 100%;
+        transition: background-color 0.3s ease;
+      " onmouseover="this.style.backgroundColor='#c37b42';" onmouseout="this.style.backgroundColor='#f4a261';">
+        Ir
+      </button>
+    </a>
+  </div>
+
+  <div style="
+    background: #e6f9f4;
+    padding: 25px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  " onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 10px 20px rgba(42, 157, 143, 0.3)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 12px rgb(0 0 0 / 0.1)';">
+    <h3 style="color: #1d7d71; margin-bottom: 10px;">Agregar Evaluaciones</h3>
+    <p style="color: #444; font-size: 0.95rem; margin-bottom: 20px;">
+      Crea nuevas preguntas o quizzes para los estudiantes.
+    </p>
+    <button onclick="alert('Funcionalidad en desarrollo')" style="
+      background-color: #2a9d8f;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    " onmouseover="this.style.backgroundColor='#1f6f71';" onmouseout="this.style.backgroundColor='#2a9d8f';">
+      Ir
+    </button>
+  </div>
+
+  <div style="
+    background: #f3e6fa;
+    padding: 25px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  " onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 10px 20px rgba(155, 89, 182, 0.3)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 12px rgb(0 0 0 / 0.1)';">
+    <h3 style="color: #7a3ea5; margin-bottom: 10px;">Ver Progreso</h3>
+    <p style="color: #444; font-size: 0.95rem; margin-bottom: 20px;">
+      Consulta el avance académico de los estudiantes.
+    </p>
+    <button onclick="alert('Funcionalidad en desarrollo')" style="
+      background-color: #9b59b6;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    " onmouseover="this.style.backgroundColor='#703f9f';" onmouseout="this.style.backgroundColor='#9b59b6';">
+      Ir
+    </button>
+  </div>
+
+</div>
+{% endblock %}

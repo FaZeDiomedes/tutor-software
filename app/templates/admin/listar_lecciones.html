@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Lecciones{% endblock %}
+
+{% block content %}
+<h2>Lista de Lecciones</h2>
+
+{% if lecciones %}
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 40px;">#</th>
+                <th>Título</th>
+                <th>Contenido</th>
+                <th style="width: 120px;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for leccion in lecciones %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ leccion.titulo }}</td>
+                <td>{{ leccion.contenido }}</td>
+                <td>
+                    <form class="confirm-delete" method="POST" action="{{ url_for('admin_eliminar_leccion', index=loop.index0) }}">
+                        <button type="submit" style="background-color:#d33; color:white; border:none; padding:6px 12px; border-radius:4px; cursor:pointer;">
+                            Eliminar
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No hay lecciones disponibles.</p>
+{% endif %}
+
+<br>
+<a href="{{ url_for('admin_dashboard') }}" style="color:#003366; font-weight:bold; text-decoration:none;">&larr; Volver al Panel</a>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        background: white;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 12px 15px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    thead tr {
+        background-color: #003366;
+        color: white;
+    }
+
+    tbody tr:hover {
+        background-color: #f1faff;
+    }
+
+    button:hover {
+        background-color: #b22a2a !important;
+    }
+</style>
+{% endblock %}

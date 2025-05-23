@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Usuarios{% endblock %}
+
+{% block content %}
+<h2 style="text-align:center; margin-bottom: 25px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #222;">
+  Lista de Usuarios
+</h2>
+
+{% if usuarios %}
+    <div style="max-width: 900px; margin: 0 auto;">
+      <table style="width: 100%; border-collapse: collapse; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+          <thead style="background-color: #0077cc; color: white;">
+              <tr>
+                  <th style="padding: 12px 15px; text-align: left;">#</th>
+                  <th style="padding: 12px 15px; text-align: left;">Usuario</th>
+                  <th style="padding: 12px 15px; text-align: left;">Rol</th>
+                  <th style="padding: 12px 15px; text-align: center;">Acciones</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for email, datos in usuarios.items() %}
+              <tr style="border-bottom: 1px solid #ddd; transition: background-color 0.3s;">
+                  <td style="padding: 12px 15px;">{{ loop.index }}</td>
+                  <td style="padding: 12px 15px;">{{ email }}</td>
+                  <td style="padding: 12px 15px;">{{ datos.rol }}</td>
+                  <td style="padding: 12px 15px; text-align: center;">
+                      <form method="POST" action="{{ url_for('admin_eliminar_usuario', email=email) }}" style="display:inline;" onsubmit="return confirm('¿Seguro que deseas eliminar este usuario?');">
+                          <button type="submit" style="
+                            background-color: #e74c3c;
+                            border: none;
+                            color: white;
+                            padding: 6px 12px;
+                            border-radius: 6px;
+                            cursor: pointer;
+                            font-weight: 600;
+                            transition: background-color 0.3s;
+                          " onmouseover="this.style.backgroundColor='#c0392b';" onmouseout="this.style.backgroundColor='#e74c3c';">
+                            Eliminar
+                          </button>
+                      </form>
+                  </td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+
+      <div style="margin-top: 20px; text-align: right;">
+          <a href="{{ url_for('admin_agregar_usuario') }}" style="
+            background-color: #0077cc;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+          " onmouseover="this.style.backgroundColor='#005ea6';" onmouseout="this.style.backgroundColor='#0077cc';">
+            Agregar nuevo usuario
+          </a>
+          <br><br>
+          <a href="{{ url_for('admin_dashboard') }}" style="color: #555; font-weight: 600; text-decoration: underline;">Volver al Panel</a>
+      </div>
+    </div>
+{% else %}
+    <p style="text-align:center; color: #888; font-style: italic; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+      No hay usuarios registrados.
+    </p>
+{% endif %}
+{% endblock %}

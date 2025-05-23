@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Perfil{% endblock %}
+
+{% block content %}
+<h2>Perfil de Usuario</h2>
+
+<h3>Lecciones completadas</h3>
+<ul>
+  {% if progreso.lecciones_completadas %}
+    {% for leccion_id in progreso.lecciones_completadas %}
+      {% set leccion = lecciones | selectattr('id', 'equalto', leccion_id) | first %}
+      <li>{{ leccion.titulo if leccion else leccion_id }}</li>
+    {% endfor %}
+  {% else %}
+    <li>No has completado ninguna lección aún.</li>
+  {% endif %}
+</ul>
+
+<h3>Resultados de Quizzes</h3>
+<ul>
+  {% if progreso.quiz_scores %}
+    {% for quiz, score in progreso.quiz_scores.items() %}
+      <li>{{ quiz }}: {{ score }} puntos</li>
+    {% endfor %}
+  {% else %}
+    <li>No hay resultados de quizzes.</li>
+  {% endif %}
+</ul>
+
+<a href="{{ url_for('menu') }}">Volver al menú</a>
+{% endblock %}

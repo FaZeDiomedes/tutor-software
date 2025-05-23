@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Tutor Software{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: normal;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 960px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 12px rgb(0 0 0 / 0.1);
+        }
+
+        footer {
+            background-color: #f2f2f2;
+            text-align: center;
+            padding: 10px;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info {
+            margin-right: 15px;
+            font-weight: 600;
+        }
+
+        /* Estilos para mensajes flash */
+        .flash-message {
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            border: 1px solid transparent;
+        }
+
+        .flash-message.error {
+            color: white;
+            background-color: #f44336; /* rojo */
+            border-color: #d32f2f;
+        }
+
+        .flash-message.success {
+            color: #155724; /* verde oscuro */
+            background-color: #d4edda; /* verde claro */
+            border-color: #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Tutor Software</h1>
+        </div>
+        <div class="nav-right">
+            {% if session.get('user') %}
+                <span class="user-info">Usuario: {{ session.get('user') }}</span>
+                <nav>
+                    {% if session.get('rol') == 'admin' %}
+                        <a href="{{ url_for('admin_dashboard') }}">Admin</a>
+                        <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+                    {% else %}
+                        <a href="{{ url_for('menu') }}">Menú</a>
+                        <a href="{{ url_for('lecciones_estudiante') }}">Lecciones</a>
+                        <a href="{{ url_for('quiz') }}">Quiz</a>
+                        <a href="{{ url_for('perfil') }}">Perfil</a>
+                        <a href="{{ url_for('feedback') }}">Feedback</a>
+                        <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+                    {% endif %}
+                </nav>
+            {% else %}
+                <nav>
+                    <a href="{{ url_for('login') }}">Login</a>
+                    <a href="{{ url_for('register') }}">Registrarse</a>
+                </nav>
+            {% endif %}
+        </div>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2025 Tutor Software</p>
+    </footer>
+
+    <!-- SweetAlert CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+    // Detectar forms con clase confirm-delete y usar SweetAlert
+    document.addEventListener('DOMContentLoaded', function () {
+        const forms = document.querySelectorAll('form.confirm-delete');
+        forms.forEach(form => {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "¡Esta acción no se puede deshacer!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Lecciones{% endblock %}
+
+{% block content %}
+<h2>Lecciones Disponibles</h2>
+
+<ul style="list-style-type: none; padding: 0;">
+  {% for lec in lecciones %}
+    <li style="margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+      <h3>{{ lec.titulo }}</h3>
+      <p>{{ lec.contenido }}</p>
+
+      <form method="POST" action="{{ url_for('completar_leccion', leccion_id=lec.id) }}">
+        <button type="submit" style="
+          background-color: #28a745;
+          color: white;
+          border: none;
+          padding: 8px 15px;
+          border-radius: 5px;
+          cursor: pointer;
+          font-weight: bold;
+        ">Marcar como completada</button>
+      </form>
+    </li>
+  {% endfor %}
+</ul>
+
+<a href="{{ url_for('menu') }}">Volver al menú</a>
+{% endblock %}
